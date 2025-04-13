@@ -19,6 +19,20 @@
 ![License](https://img.shields.io/badge/license-MIT-orange.svg)
 ![Status](https://img.shields.io/badge/status-Active-brightgreen.svg)
 
+<br>
+
+<div align="center">
+  <a href="https://github.com/AayushBadola">
+    <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub"/>
+  </a>
+  <a href="https://linkedin.com/in/yourlinkedin">
+    <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn"/>
+  </a>
+  <a href="mailto:youremail@example.com">
+    <img src="https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Email"/>
+  </a>
+</div>
+
 </div>
 
 ---
@@ -148,7 +162,7 @@ clean:
 The `get_string` function provides a safe way to read text input of any length:
 
 ```c
-#include 
+#include <stdio.h>
 #include "aquant.h"
 
 int main(void) {
@@ -166,7 +180,7 @@ int main(void) {
 Aquant handles the parsing and validation of numeric input automatically:
 
 ```c
-#include 
+#include <stdio.h>
 #include "aquant.h"
 
 int main(void) {
@@ -195,7 +209,7 @@ int main(void) {
 Getting a single character input for confirmation prompts:
 
 ```c
-#include 
+#include <stdio.h>
 #include "aquant.h"
 
 int main(void) {
@@ -218,8 +232,8 @@ int main(void) {
 Combining multiple input functions to create a data entry form:
 
 ```c
-#include 
-#include 
+#include <stdio.h>
+#include <stdlib.h>
 #include "aquant.h"
 
 typedef struct {
@@ -519,7 +533,19 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## 📞 Contact
 
-Aayush Badola - [GitHub Profile](https://github.com/AayushBadola) | [Linkedin](www.linkedin.com/in/aayushbadola)
+Aayush Badola
+
+<div align="center">
+  <a href="https://github.com/AayushBadola">
+    <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub"/>
+  </a>&nbsp;&nbsp;
+  <a href="https://linkedin.com/in/yourlinkedin">
+    <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn"/>
+  </a>&nbsp;&nbsp;
+  <a href="mailto:youremail@example.com">
+    <img src="https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Email"/>
+  </a>
+</div>
 
 ---
 
