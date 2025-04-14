@@ -130,42 +130,7 @@ gcc your_program.c aquant.c -o your_program
 ```bash
 ./your_program
 ```
-
-### Option 2: Static Library
-
-For larger projects, you might prefer building Aquant as a static library:
-
-```bash
-# Compile the library object file
-gcc -c aquant.c -o aquant.o
-
-# Create the static library archive
-ar rcs libaquant.a aquant.o
-
-# Compile your program with the library
-gcc your_program.c -L. -laquant -o your_program
-```
-
-### Option 3: Using Make
-
-If you have a Makefile for your project, add the following:
-
-```makefile
-CC = gcc
-CFLAGS = -Wall -Wextra
-
-your_program: your_program.c libaquant.a
-	$(CC) $(CFLAGS) your_program.c -L. -laquant -o your_program
-
-libaquant.a: aquant.o
-	ar rcs libaquant.a aquant.o
-
-aquant.o: aquant.c aquant.h
-	$(CC) $(CFLAGS) -c aquant.c -o aquant.o
-
-clean:
-	rm -f *.o *.a your_program
-```
+This will start your program and you will be able to run the C file you created.
 
 <div align="center">
   
