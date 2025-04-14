@@ -108,7 +108,7 @@ The simplest way to use Aquant in your project is to include the source files di
 3. Include the header in your source files:
 
 ```bash
-git clone https://github.com/AayushBadola/Aquant
+git clone https://github.com/AayushBadola/Aquant.git
 ```
 
 ```bash
