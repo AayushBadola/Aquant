@@ -107,6 +107,14 @@ The simplest way to use Aquant in your project is to include the source files di
 2. Place them in your project directory
 3. Include the header in your source files:
 
+```bash
+git clone https://github.com/AayushBadola/Aquant
+```
+
+```bash
+cd Aquant
+```
+
 ```c
 #include "aquant.h"
 ```
@@ -115,6 +123,12 @@ The simplest way to use Aquant in your project is to include the source files di
 
 ```bash
 gcc your_program.c aquant.c -o your_program
+```
+
+4. Run your program:
+
+```bash
+./your_program
 ```
 
 ### Option 2: Static Library
