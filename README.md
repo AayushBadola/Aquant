@@ -49,7 +49,7 @@ Aquant is a lightweight yet powerful C library designed to simplify and standard
 
 The library abstracts away the complexity and potential pitfalls of traditional input methods in C, offering a collection of intuitive functions that promote safe memory handling and reliable user interaction.
 
-### Note - Its just an extention of C for using string functions you have to import <string.h>, <stdlib.h> etc "aquant" is only there to make "C - language" less complex for beginners For more info check out Harvard's CS50. Its has the same use cases.
+### Note - Its just an extention of C for using string functions you have to import <string.h>, <stdlib.h> etc "aquant" is only there to make "C - language" less complex 	   for beginners For more info check out Harvard's CS50. Its has the same use cases.
 <br>
 <div align="center">
   
