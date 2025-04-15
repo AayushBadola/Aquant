@@ -39,7 +39,7 @@
 
 <div align="center">
   
-### "Simplify user input handling in C with confidence"
+### "Simplify C- Language"
 
 </div>
 
