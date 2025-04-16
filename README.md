@@ -10,8 +10,9 @@
 
 <br>
 
-<kbd><b><span style="color:#27ae60">Version 1.0.0</span></b></kbd>
-
+<kbd><b><span style="color:#27ae60">Current Version 1.1.0</span></b></kbd>
+<br>
+<kbd><b><span style="color:#FF474C">previous Version 1.0.0</span></b></kbd>
 <br>
 
 ![Language](https://img.shields.io/badge/language-C-green.svg)
@@ -49,7 +50,7 @@ Aquant is a lightweight yet powerful C library designed to simplify and standard
 
 The library abstracts away the complexity and potential pitfalls of traditional input methods in C, offering a collection of intuitive functions that promote safe memory handling and reliable user interaction.
 
-### Note - Its just an extention of C for using string functions you have to import <string.h>, <stdlib.h> etc "aquant" is only there to make "C - language" less complex 	   for beginners For more info check out Harvard's CS50. Its has the same use cases.
+### Note - Aquant has been updated to 1.1.0 please remove the original 1.0.0 File and clone the updated file to use new arrary functions
 <br>
 <div align="center">
   
@@ -99,7 +100,6 @@ requiring secure and validated user input.
 
 ## 🚀 Installation
 
-### Option 1: Direct Inclusion
 
 The simplest way to use Aquant in your project is to include the source files directly:
 
@@ -422,81 +422,297 @@ Reads a double-precision floating-point number from standard input with validati
   ```c
   double pi = get_double("Enter the value of pi: ");
   printf("Area of circle with radius 2: %.10f\n", pi * 2 * 2);
+
   ```
 
+  ### Array Utility Functions (v1.1.0+)
+
+These functions operate on integer arrays (`int[]`).
+
+#### `array_max`
+
+Finds the maximum value in an integer array.
+
+-   **Parameters**:
+    -   `arr`: `const int*` - Pointer to the integer array.
+    -   `size`: `size_t` - Number of elements in the array.
+    -   `max_val`: `int*` - Pointer to an `int` variable where the maximum value will be stored if found.
+-   **Returns**:
+    -   `bool`: `true` if the maximum value was found (array not NULL, size > 0, `max_val` not NULL).
+    -   `bool`: `false` otherwise (input invalid).
+-   **Behavior**:
+    -   Iterates through the array to find the largest element.
+    -   If successful, stores the maximum value found in the variable pointed to by `max_val`.
+    -   Returns `false` if the array pointer `arr` is NULL, `size` is 0, or the output pointer `max_val` is NULL.
+-   **Implementation Details**:
+    -   Performs a single pass through the array.
+    -   Time Complexity: O(n)
+    -   Space Complexity: O(1)
+-   **Example**:
+    ```c
+    int nums[] = {5, -2, 10, 8};
+    int max_result;
+    if (array_max(nums, 4, &max_result)) {
+        printf("Max: %d\n", max_result); // Output: Max: 10
+    } else {
+        printf("Could not find maximum.\n");
+    }
+    ```
+
+---
+
+#### `array_min`
+
+Finds the minimum value in an integer array.
+
+-   **Parameters**:
+    -   `arr`: `const int*` - Pointer to the integer array.
+    -   `size`: `size_t` - Number of elements in the array.
+    -   `min_val`: `int*` - Pointer to an `int` variable where the minimum value will be stored if found.
+-   **Returns**:
+    -   `bool`: `true` if the minimum value was found (array not NULL, size > 0, `min_val` not NULL).
+    -   `bool`: `false` otherwise (input invalid).
+-   **Behavior**:
+    -   Iterates through the array to find the smallest element.
+    -   If successful, stores the minimum value found in the variable pointed to by `min_val`.
+    -   Returns `false` if the array pointer `arr` is NULL, `size` is 0, or the output pointer `min_val` is NULL.
+-   **Implementation Details**:
+    -   Performs a single pass through the array.
+    -   Time Complexity: O(n)
+    -   Space Complexity: O(1)
+-   **Example**:
+    ```c
+    int nums[] = {5, -2, 10, 8};
+    int min_result;
+    if (array_min(nums, 4, &min_result)) {
+        printf("Min: %d\n", min_result); // Output: Min: -2
+    } else {
+        printf("Could not find minimum.\n");
+    }
+    ```
+
+---
+
+#### `array_sum`
+
+Calculates the sum of all elements in an integer array.
+
+-   **Parameters**:
+    -   `arr`: `const int*` - Pointer to the integer array.
+    -   `size`: `size_t` - Number of elements in the array.
+    -   `sum`: `long long*` - Pointer to a `long long` variable where the sum will be stored.
+-   **Returns**:
+    -   `bool`: `true` if the sum was calculated (includes sum = 0 for empty arrays).
+    -   `bool`: `false` if `sum` is NULL, or if `arr` is NULL *and* `size` > 0 (indicates invalid state).
+-   **Behavior**:
+    -   Iterates through the array, adding each element to an accumulator.
+    -   If successful, stores the final sum in the variable pointed to by `sum`.
+    -   Uses `long long` for the sum to reduce the risk of integer overflow.
+    -   Treats the sum of an empty array (size = 0) as 0 and returns `true`.
+-   **Implementation Details**:
+    -   Performs a single pass through the array.
+    -   Time Complexity: O(n)
+    -   Space Complexity: O(1) (excluding the space for the `long long` sum variable passed in).
+-   **Example**:
+    ```c
+    int nums[] = {5, -2, 10, 8};
+    long long sum_result;
+    if (array_sum(nums, 4, &sum_result)) {
+        printf("Sum: %lld\n", sum_result); // Output: Sum: 21
+    } else {
+        printf("Could not calculate sum.\n");
+    }
+    ```
+
+---
+
+#### `array_has_pair_sum`
+
+Checks if any *distinct* pair of elements in the array sums up to the target value.
+
+-   **Parameters**:
+    -   `arr`: `const int*` - Pointer to the integer array.
+    -   `size`: `size_t` - Number of elements in the array.
+    -   `target`: `int` - The target sum value.
+-   **Returns**:
+    -   `bool`: `true` if a pair `(arr[i], arr[j])` exists where `i != j` and `arr[i] + arr[j] == target`.
+    -   `bool`: `false` otherwise, or if `size < 2`, or if internal memory allocation fails.
+-   **Behavior**:
+    -   Determines if two different elements in the array add up to the `target`.
+    -   Handles duplicate numbers within the array correctly (e.g., `[5, 5]` sums to `10`).
+-   **Implementation Details**:
+    -   Uses an internal hash table for efficient lookups.
+    -   Iterates through the array once. For each element `x`, it checks if the complement (`target - x`) exists in the hash table. If not, `x` is added to the table.
+    -   Handles potential integer overflow when calculating the complement.
+    -   Time Complexity: O(n) average (due to hash table lookups/insertions). O(n) worst case if hash collisions are pathologically bad, but highly unlikely with a reasonable hash function.
+    -   Space Complexity: O(n) for the internal hash table.
+-   **Example**:
+    ```c
+    int nums[] = {2, 7, 11, 15, 7};
+    bool found_9 = array_has_pair_sum(nums, 5, 9);  // Checks for 2 + 7
+    bool found_14 = array_has_pair_sum(nums, 5, 14); // Checks for 7 + 7
+    printf("Pair summing to 9 found: %s\n", found_9 ? "true" : "false");   // Output: true
+    printf("Pair summing to 14 found: %s\n", found_14 ? "true" : "false"); // Output: true
+    ```
+
+---
+
+#### `array_has_pair_product`
+
+Checks if any *distinct* pair of elements in the array multiplies to the target value.
+
+-   **Parameters**:
+    -   `arr`: `const int*` - Pointer to the integer array.
+    -   `size`: `size_t` - Number of elements in the array.
+    -   `target`: `int` - The target product value.
+-   **Returns**:
+    -   `bool`: `true` if a pair `(arr[i], arr[j])` exists where `i != j` and `arr[i] * arr[j] == target`.
+    -   `bool`: `false` otherwise, or if `size < 2`, or if internal memory allocation fails.
+-   **Behavior**:
+    -   Determines if two different elements in the array multiply to the `target`.
+    -   Handles zero correctly: returns `true` for target 0 if the array contains at least one zero and one non-zero, or at least two zeros.
+    -   Handles duplicate numbers correctly (e.g., `[6, 6]` has product `36`).
+-   **Implementation Details**:
+    -   Uses an internal hash table for efficient lookups.
+    -   Handles zero elements separately first. Then populates the hash table with non-zero elements.
+    -   Iterates through the non-zero elements `x`, checking if `target / x` (provided `target` is divisible by `x`) exists in the hash table.
+    -   Performs internal multiplication checks using `long long` to reduce intermediate overflow risk.
+    -   Time Complexity: O(n) average.
+    -   Space Complexity: O(n) for the internal hash table.
+-   **Example**:
+    ```c
+    int nums[] = {3, 5, -2, 8, 5};
+    bool found_neg_10 = array_has_pair_product(nums, 5, -10); // Checks for 5 * -2
+    bool found_25 = array_has_pair_product(nums, 5, 25);     // Checks for 5 * 5
+    printf("Pair with product -10 found: %s\n", found_neg_10 ? "true" : "false"); // Output: true
+    printf("Pair with product 25 found: %s\n", found_25 ? "true" : "false");     // Output: true
+    ```
+
+---
+
+#### `array_has_pair_difference`
+
+Checks if any pair of elements (order matters, `a - b`) has a difference equal to the target value.
+
+-   **Parameters**:
+    -   `arr`: `const int*` - Pointer to the integer array.
+    -   `size`: `size_t` - Number of elements in the array.
+    -   `target`: `int` - The target difference value (`arr[i] - arr[j] == target`).
+-   **Returns**:
+    -   `bool`: `true` if a pair `(arr[i], arr[j])` exists where `arr[i] - arr[j] == target`. (`i` can be equal to `j` if `target` is 0).
+    -   `bool`: `false` otherwise, or if internal memory allocation fails.
+-   **Behavior**:
+    -   Determines if any element subtracted from another results in the `target`.
+    -   `array_has_pair_difference(arr, size, 0)` will return `true` if the array contains duplicate elements, or if the array is non-empty (since `x - x = 0`). *Correction*: The code iterates and adds to the hash table before checking, so `x - x = 0` will only be found if `x` appears at least twice.
+-   **Implementation Details**:
+    -   Uses an internal hash table for efficient lookups.
+    -   Iterates through the array once. For each element `x`, it checks if `x - target` or `x + target` already exists in the hash table built so far. If not, `x` is added to the table.
+    -   Handles potential integer overflows when calculating the required complements (`x - target`, `x + target`).
+    -   Time Complexity: O(n) average.
+    -   Space Complexity: O(n) for the internal hash table.
+-   **Example**:
+    ```c
+    int nums[] = {10, 7, 15, 5, 7};
+    bool found_3 = array_has_pair_difference(nums, 5, 3);  // Checks for 10 - 7
+    bool found_neg_5 = array_has_pair_difference(nums, 5, -5); // Checks for 10 - 15
+    bool found_0 = array_has_pair_difference(nums, 5, 0); // Checks for 7 - 7
+    printf("Pair with difference 3 found: %s\n", found_3 ? "true" : "false");     // Output: true
+    printf("Pair with difference -5 found: %s\n", found_neg_5 ? "true" : "false"); // Output: true
+    printf("Pair with difference 0 found: %s\n", found_0 ? "true" : "false");     // Output: true
+    ```
 ## 🔧 Internal Implementation
 
-The library uses a layered approach where more complex functions build upon simpler ones:
+The library uses a layered approach for input and optimized algorithms for array operations:
 
-1. `get_string` forms the foundation, providing dynamic memory allocation for input
-2. All other functions use `get_string` internally to read the input as text
-3. Each numeric function performs appropriate parsing and validation:
-   - `get_char` validates that exactly one character was entered
-   - `get_int` and `get_long` use `strtol` with appropriate range checking
-   - `get_float` and `get_double` use `strtof` and `strtod` respectively
+1.  **Input Foundation:** `get_string` forms the base, providing robust dynamic memory allocation for reading lines from standard input.
+2.  **Input Validation:** All other `get_*` functions utilize `get_string` internally, followed by specific parsing and validation logic:
+    *   `get_char` validates that exactly one character was entered.
+    *   `get_int` and `get_long` use `strtol` with appropriate range checking and ensure no trailing non-whitespace characters.
+    *   `get_float` and `get_double` use `strtof` and `strtod` respectively, also checking ranges and for trailing characters.
+3.  **Array Operations:**
+    *   `array_max`, `array_min`, `array_sum` perform simple O(n) traversals.
+    *   `array_has_pair_sum`, `array_has_pair_product`, `array_has_pair_difference` use an **internal hash table** to achieve O(n) average time complexity for checking pair conditions, requiring O(n) auxiliary space.
 
-This design ensures consistent behavior across functions and minimizes code duplication.
+This design ensures consistent input behavior, minimizes code duplication for input reading, and provides efficient algorithms for array analysis.
 
 ## 📋 Best Practices
 
 When using the Aquant library, keep the following best practices in mind:
 
-1. **Always check for NULL** when using `get_string`:
-   ```c
-   string input = get_string("Enter text: ");
-   if (input == NULL) {
-       // Handle error or EOF
-       return 1;
-   }
-   ```
+1.  **Always check for NULL** when using `get_string`:
+    ```c
+    string input = get_string("Enter text: ");
+    if (input == NULL) {
+        // Handle memory allocation error or EOF
+        fprintf(stderr, "Error reading input or EOF.\n");
+        return 1;
+    }
+    // ... use input ...
+    ```
 
-2. **Free string memory** when you're done with it:
-   ```c
-   string name = get_string("Name: ");
-   // Use name...
-   free(name);  // Prevent memory leaks
-   ```
+2.  **Free string memory** obtained from `get_string` when you're done:
+    ```c
+    string name = get_string("Name: ");
+    if (name != NULL) {
+        // Use name...
+        printf("Processing %s\n", name);
+        free(name); // Prevent memory leaks
+    }
+    ```
 
-3. **Consider range limitations** of the various numeric types:
-   - `int`: Typically -2,147,483,648 to 2,147,483,647
-   - `long`: Potentially larger range depending on the platform
-   - `float`: ~7 decimal digits of precision
-   - `double`: ~15 decimal digits of precision
+3.  **Check boolean return values** for `array_max`, `array_min`, `array_sum` before using the output pointer:
+    ```c
+    int arr[] = {1, 2, 3};
+    int max_val;
+    if (array_max(arr, 3, &max_val)) {
+        // OK to use max_val
+        printf("Max is %d\n", max_val);
+    } else {
+        // Handle error (e.g., invalid array pointer, size 0, or null output pointer)
+        fprintf(stderr, "Failed to find maximum.\n");
+    }
+    ```
 
-4. **Use appropriate prompts** to guide users:
-   ```c
-   // Good prompt with context and format
-   float height = get_float("Enter height in meters (e.g., 1.75): ");
-   
-   // Not as helpful
-   float height = get_float("Height: ");
-   ```
+4.  **Consider range limitations** of the various numeric types (`int`, `long`, `float`, `double`) when choosing which `get_*` function to use.
+
+5.  **Use appropriate prompts** to guide users clearly.
 
 ## 🔍 Error Handling
 
-Aquant handles most input errors internally by prompting for retry. However, you should still handle these cases:
+Aquant handles most standard input errors internally by prompting the user to retry. However, your calling code should still be prepared for:
 
-1. **Memory allocation failure** in `get_string` (returns NULL)
-2. **EOF encountered** in `get_string` (also returns NULL)
-3. **Extremely large inputs** that could cause memory allocation issues
+1.  **Memory allocation failure** in `get_string` (returns `NULL`).
+2.  **EOF encountered** at the start of input in `get_string` (returns `NULL`).
+3.  **Internal memory allocation failure** within the array pair-checking functions (`array_has_pair_*`). These functions might return `false` prematurely if `malloc`/`calloc` fails while building their internal hash table. Robust applications might need alternative strategies if this is a critical concern, although it's less common than input errors.
+4.  **Invalid function arguments** passed to array functions (e.g., `NULL` array pointer with `size > 0`, `NULL` output pointers for `array_max/min/sum`). These are checked and result in a `false` return value.
 
 ## 📦 Dependencies
 
 Aquant relies only on standard C libraries:
-- `<stdio.h>`: For input/output operations
-- `<stdlib.h>`: For memory allocation and numeric conversion
-- `<string.h>`: For string operations
-- `<ctype.h>`: For character classification
-- `<limits.h>`: For integer limits
-- `<float.h>`: For floating-point limits
-- `<errno.h>`: For error reporting
+
+-   `<stdio.h>`: For input/output operations (`printf`, `fgetc`, `fflush`).
+-   `<stdlib.h>`: For memory allocation (`malloc`, `realloc`, `free`), numeric conversion (`strtol`, `strtof`, `strtod`), and `llabs`.
+-   `<string.h>`: For string operations (not directly used in the current functions, but common in C).
+-   `<ctype.h>`: For character classification (`isspace`).
+-   `<limits.h>`: For integer limits (`INT_MIN`, `INT_MAX`).
+-   `<float.h>`: For floating-point limits (not explicitly used for checking but relevant).
+-   `<errno.h>`: For error reporting from `strto*` functions (`errno`, `ERANGE`).
+-   `<stdbool.h>`: For the `bool`, `true`, `false` types and values.
+-   `<math.h>`: For `llabs` (long long absolute value) used in the internal hash function.
 
 ## 🔄 Version History
 
-### Version 1.0.0 (Current)
-- Initial release
-- Complete implementation of all core input functions
-- Comprehensive error handling and validation
+### Version 1.1.0
+-   **Added Array Utility Functions:** `array_max`, `array_min`, `array_sum`.
+-   **Added Array Pair Check Functions:** `array_has_pair_sum`, `array_has_pair_product`, `array_has_pair_difference`.
+-   **Optimized Pair Check Functions:** Implemented pair check functions using an internal hash table for O(n) average time complexity.
+-   Added `<stdbool.h>` and `<math.h>` dependencies.
+-   Improved input function robustness slightly (e.g., `fflush`, more specific error messages).
+
+### Version 1.0.0
+-   Initial release.
+-   Complete implementation of all core `get_*` input functions (`get_string`, `get_char`, `get_int`, `get_long`, `get_float`, `get_double`).
+-   Input validation and retry logic.
 
 ## 📝 License
 
