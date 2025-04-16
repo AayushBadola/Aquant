@@ -5,8 +5,10 @@
 #include <limits.h>
 #include <float.h>
 #include <errno.h>
+#include <stdbool.h>
 
 #include "aquant.h"
+
 
 string get_string(const char *prompt)
 {
@@ -270,4 +272,96 @@ double get_double(const char *prompt)
         free(line);
         if (prompt == NULL) prompt = "Retry: ";
     }
+}
+
+
+bool array_max(const int *arr, size_t size, int *max_val) {
+    if (arr == NULL || size == 0) {
+        return false;
+    }
+
+    *max_val = arr[0];
+    for (size_t i = 1; i < size; ++i) {
+        if (arr[i] > *max_val) {
+            *max_val = arr[i];
+        }
+    }
+    return true;
+}
+
+bool array_min(const int *arr, size_t size, int *min_val) {
+    if (arr == NULL || size == 0) {
+        return false;
+    }
+
+    *min_val = arr[0];
+    for (size_t i = 1; i < size; ++i) {
+        if (arr[i] < *min_val) {
+            *min_val = arr[i];
+        }
+    }
+    return true;
+}
+
+bool array_sum(const int *arr, size_t size, long long *sum) {
+    if (sum == NULL) {
+        return false;
+    }
+    if (arr == NULL && size > 0) {
+        *sum = 0;
+        return false;
+    }
+
+    *sum = 0;
+    for (size_t i = 0; i < size; ++i) {
+        *sum += arr[i];
+    }
+    return true;
+}
+
+
+bool array_has_pair_sum(const int *arr, size_t size, int target) {
+    if (arr == NULL || size < 2) {
+        return false;
+    }
+
+    for (size_t i = 0; i < size - 1; ++i) {
+        for (size_t j = i + 1; j < size; ++j) {
+            if (arr[i] + arr[j] == target) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+bool array_has_pair_product(const int *arr, size_t size, int target) {
+    if (arr == NULL || size < 2) {
+        return false;
+    }
+
+    for (size_t i = 0; i < size - 1; ++i) {
+        for (size_t j = i + 1; j < size; ++j) {
+            long long product = (long long)arr[i] * arr[j];
+            if (product == target) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+bool array_has_pair_difference(const int *arr, size_t size, int target) {
+    if (arr == NULL) {
+        return false;
+    }
+
+    for (size_t i = 0; i < size; ++i) {
+        for (size_t j = 0; j < size; ++j) {
+            if (arr[i] - arr[j] == target) {
+                return true;
+            }
+        }
+    }
+    return false;
 }
