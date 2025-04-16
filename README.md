@@ -122,7 +122,7 @@ cd Aquant
 4. Compile your program with both files:
 
 ```bash
-gcc your_program.c aquant.c -o your_program
+gcc your_program.c aquant.c -o your_program -lm
 ```
 
 4. Run your program:
