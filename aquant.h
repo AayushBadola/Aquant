@@ -6,14 +6,12 @@
 
 typedef char *string;
 
-
 char get_char(const char *prompt);
 double get_double(const char *prompt);
 float get_float(const char *prompt);
 int get_int(const char *prompt);
 long get_long(const char *prompt);
 string get_string(const char *prompt);
-
 
 bool array_max(const int *arr, size_t size, int *max_val);
 bool array_min(const int *arr, size_t size, int *min_val);
