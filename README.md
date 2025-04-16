@@ -125,7 +125,7 @@ cd Aquant
 gcc your_program.c aquant.c -o your_program -lm
 ```
 
-4. Run your program:
+5. Run your program:
 
 ```bash
 ./your_program
