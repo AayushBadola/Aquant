@@ -633,7 +633,7 @@ The library uses a layered approach for input and optimized algorithms for array
     *   `array_max`, `array_min`, `array_sum` perform simple O(n) traversals.
     *   `array_has_pair_sum`, `array_has_pair_product`, `array_has_pair_difference` use an **internal hash table** to achieve O(n) average time complexity for checking pair conditions, requiring O(n) auxiliary space.
 
-This design ensures consistent input behavior, minimizes code duplication for input reading, and provides efficient algorithms for array analysis.
+
 
 ## 📋 Best Practices
 
