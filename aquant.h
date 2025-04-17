@@ -20,4 +20,9 @@ bool array_has_pair_sum(const int *arr, size_t size, int target);
 bool array_has_pair_product(const int *arr, size_t size, int target);
 bool array_has_pair_difference(const int *arr, size_t size, int target);
 
+
+void sort_array_n(int arr[], size_t size);
+int find_name(const char *names[], size_t size, const char *target_name);
+void print_array(const int arr[], size_t size);
+
 #endif // AQUANT_H
