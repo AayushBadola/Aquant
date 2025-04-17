@@ -425,7 +425,7 @@ Reads a double-precision floating-point number from standard input with validati
 
   ```
 
-  ### Array Utility Functions (v1.1.0+)
+  ### Array Utility Functions (v1.1.0)
 
 These functions operate on integer arrays (`int[]`).
 
@@ -620,6 +620,95 @@ Checks if any pair of elements (order matters, `a - b`) has a difference equal t
     printf("Pair with difference -5 found: %s\n", found_neg_5 ? "true" : "false"); // Output: true
     printf("Pair with difference 0 found: %s\n", found_0 ? "true" : "false");     // Output: true
     ```
+### Array Utility Functions (v1.2.0)
+#### `sort_array`
+Sorts an integer array in ascending order using Counting Sort (O(n) time complexity). Modifies the array in-place.
+
+- **Parameters**:
+  - `arr: int[]` : The integer array to sort.
+  - `size: size_t` : Number of elements in the array.
+
+- **Returns**:
+  - `void`
+- **Behaviour**:
+  - Sorts the array `arr` in non-decreasing order.
+  - Handles empty arrays or arrays with one element gracefully (returns immediately).
+  - Prints an error to `stderr` and returns if memory allocation for internal buffers fails or if the range of values is too large for `size_t` .
+- **Implementation Details**:
+  - Uses Counting Sort algorithm.
+    Requires auxiliary space proportional to the range of values (`max_val - min_val + 1`, simplified to `max_val + 1` for non-negatives) and the size of the array.
+  - Time Complexity: O(n + k), where n is the number of elements and k is the range of input values. Since k is often related to n or bounded, it's considered O(n) under typical assumptions for Counting Sort.
+  - Space Complexity: O(n + k).
+- **Example**:
+```c
+int data[] = {5, 2, 8, 2, 1, 9, 4, 0};
+size_t n = sizeof(data) / sizeof(data[0]);
+printf("Before sort: "); print_array(data, n);
+sort_array(data, n); // Use the renamed function
+printf("After sort:  "); print_array(data, n); // Output: [0, 1, 2, 2, 4, 5, 8, 9]
+```
+#### `find_string`
+Finds the first occurrence of a specific string within an array of strings.
+- **Parameters**:
+  - `strings: const char*[]` : An array of C strings (pointers to characters).
+
+  - `size: size_t` :  Number of elements (strings) in the strings array.
+
+  - `target_string: const char*` : The string to search for.
+- **Returns**:
+  -  `int` : The index of the first matching string if found.
+  - `int : -1` :  if the string is not found, or if strings or `target_string` is `NULL`.
+- **Behaviour**:
+  - Performs a linear search through the `strings` array.
+  - Compares each string in the array with `target_string` using `strcmp`.
+  - Safely handles `NULL` pointers within the `strings` array (they are skipped).
+- **Implementation Details**:
+  - Uses `strcmp` for string comparison.
+  - Requires `<string.h>` to be included (which aquant.c does).
+  - Time Complexity: `O(n * m)`, where n is the number of strings in the array and m is the average length of the strings (due to strcmp within the loop). Often simplified to `O(n)` if string length is considered bounded or small relative to n.
+  - Space Complexity: `O(1)`.
+- **Example**:
+```c
+const char *items[] = {"Apple", "Banana", "Cherry", "Apple"};
+int index = find_string(items, 4, "Apple"); // Use the renamed function
+printf("First 'Apple' found at index: %d\n", index); // Output: 0
+
+index = find_string(items, 4, "Durian");
+printf("'Durian' found at index: %d\n", index); // Output: -1
+```
+#### `print_array`
+Prints the elements of an integer array to standard output in a formatted way.
+- **Parameters**:
+  - `arr: const int[]` : The integer array to print.
+  - `size: size_t` : Number of elements in the array.
+- **Return**:
+  - `void`
+- **Behaviour**:
+  - Prints the array elements enclosed in square brackets `[]`.
+  - Elements are separated by a comma and a space `,` .
+  - Handles `NULL` arrays by printing `[]` .
+  - Handles empty arrays (size = 0) by printing  `[]` .
+  - Prints a newline character `\n` after the closing bracket.
+
+- **Implementation Details**:
+  - Uses printf for output.
+  - Iterates through the array.
+  - Time Complexity: O(n)
+  - Space Complexity: O(1)
+
+- **Example**:
+```c
+int values[] = {10, 20, 30};
+print_array(values, 3); // Output: [10, 20, 30]
+
+int empty_arr[] = {};
+print_array(empty_arr, 0); // Output: []
+
+print_array(NULL, 5); // Output: []
+```
+
+
+
 ## 🔧 Internal Implementation
 
 The library uses a layered approach for input and optimized algorithms for array operations:
@@ -630,8 +719,10 @@ The library uses a layered approach for input and optimized algorithms for array
     *   `get_int` and `get_long` use `strtol` with appropriate range checking and ensure no trailing non-whitespace characters.
     *   `get_float` and `get_double` use `strtof` and `strtod` respectively, also checking ranges and for trailing characters.
 3.  **Array Operations:**
-    *   `array_max`, `array_min`, `array_sum` perform simple O(n) traversals.
+    *   `array_max`, `array_min`, `array_sum`, `find_string`, `print_array` perform simple O(n) traversals(though `find_string` involves string comparisons).
     *   `array_has_pair_sum`, `array_has_pair_product`, `array_has_pair_difference` use an **internal hash table** to achieve O(n) average time complexity for checking pair conditions, requiring O(n) auxiliary space.
+    * `sort_array` uses Counting Sort for O(n+k) time complexity (often considered O(n)) for sorting non-negative integers, requiring O(n+k) auxiliary space.
+
 
 
 
@@ -701,6 +792,16 @@ Aquant relies only on standard C libraries:
 -   `<math.h>`: For `llabs` (long long absolute value) used in the internal hash function.
 
 ## 🔄 Version History
+### Version 1.2.0
+- **Added Array Sorting :** `sort_array` function implementing Counting Sort for non-negative integers (O(n)).
+- **Added String Array Search :** `find_string` function for linear search in `const char*[]` .
+- **Added Array Printing :** `print_array` function for formatted output of `int[]` .
+- Added <stdint.h> dependency for SIZE_MAX.
+
+
+
+
+
 
 ### Version 1.1.0
 -   **Added Array Utility Functions:** `array_max`, `array_min`, `array_sum`.
@@ -751,3 +852,4 @@ Aayush Badola
 Made with ❤️ by [Aayush Badola](https://github.com/AayushBadola)
 
 </div>
+
