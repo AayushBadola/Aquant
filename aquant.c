@@ -7,7 +7,7 @@
 #include <errno.h>
 #include <stdbool.h>
 #include <math.h>
-
+#include <stdint.h>
 #include "aquant.h"
 
 string get_string(const char *prompt)
@@ -519,7 +519,7 @@ bool array_has_pair_product(const int *arr, size_t size, int target) {
         for(size_t i = 0; i < ht->table_size; ++i) {
             if (ht->buckets[i] != NULL) {
                 non_zero_elements++;
-                break; // Found at least one non-zero
+                break;
             }
         }
         if (zero_count > 0 && non_zero_elements > 0) {
@@ -576,15 +576,14 @@ bool array_has_pair_difference(const int *arr, size_t size, int target) {
         if (check1) {
              HashNode* node1 = ht_search(ht, (int)needed1_ll);
              if (node1) {
-                  // Special case: if target is 0, arr[i] - target = arr[i].
-                  // We need > 1 count *if* we are looking for arr[i] itself.
+
                   if (target == 0) {
-                      if (node1->count >= 1) { // >=1 because ht_insert hasn't happened yet for arr[i]
+                      if (node1->count >= 1) {
                            found = true;
                            break;
                       }
                   } else {
-                      found = true; // Found arr[i] - target
+                      found = true;
                       break;
                   }
              }
@@ -592,7 +591,7 @@ bool array_has_pair_difference(const int *arr, size_t size, int target) {
 
         if (target != 0 && check2) {
              if (ht_search(ht, (int)needed2_ll)) {
-                 found = true; // Found arr[i] + target (which means (arr[i]+target) - arr[i] = target)
+                 found = true;
                  break;
              }
         }
@@ -606,4 +605,120 @@ bool array_has_pair_difference(const int *arr, size_t size, int target) {
 
     ht_destroy(ht);
     return found;
+}
+
+
+static int internal_find_max(const int arr[], size_t size) {
+    if (size == 0) return 0;
+    int max_val = arr[0];
+     for (size_t i = 1; i < size; ++i) {
+        if (arr[i] > max_val) {
+            max_val = arr[i];
+        }
+    }
+    if (max_val < 0) max_val = 0;
+    return max_val;
+}
+
+
+void sort_array_n(int arr[], size_t size) {
+    if (arr == NULL || size < 2) {
+        return;
+    }
+
+
+    int max_val;
+    if (!array_max(arr, size, &max_val)) {
+
+        return;
+    }
+    int min_val;
+     if (!array_min(arr, size, &min_val)) {
+
+         return;
+     }
+
+
+    if (min_val < 0) {
+
+        fprintf(stderr, "Warning: sort_array_n currently implemented for non-negative integers only for O(n) counting sort.\n");
+
+        return;
+    }
+
+
+    unsigned long long range_check = (unsigned long long)max_val + 1;
+    if (range_check > SIZE_MAX) {
+         fprintf(stderr, "Error: Range of values too large for counting sort memory allocation.\n");
+         return;
+    }
+    size_t range = (size_t)max_val + 1;
+
+
+    int *count = calloc(range, sizeof(int));
+    if (count == NULL) {
+        perror("Failed to allocate memory for count array");
+        return;
+    }
+
+    int *output = malloc(size * sizeof(int));
+    if (output == NULL) {
+        perror("Failed to allocate memory for output array");
+        free(count);
+        return;
+    }
+
+
+    for (size_t i = 0; i < size; ++i) {
+        count[arr[i]]++;
+    }
+
+
+    for (size_t i = 1; i < range; ++i) {
+        count[i] += count[i - 1];
+    }
+
+
+    for (long long i = size - 1; i >= 0; --i) {
+         output[count[arr[i]] - 1] = arr[i];
+         count[arr[i]]--;
+    }
+
+
+    for (size_t i = 0; i < size; ++i) {
+        arr[i] = output[i];
+    }
+
+    free(count);
+    free(output);
+}
+
+
+int find_name(const char *names[], size_t size, const char *target_name) {
+    if (names == NULL || target_name == NULL) {
+        return -1;
+    }
+
+    for (size_t i = 0; i < size; ++i) {
+        if (names[i] != NULL && strcmp(names[i], target_name) == 0) {
+            return (int) i;
+        }
+    }
+    return -1;
+}
+
+
+void print_array(const int arr[], size_t size) {
+     if (arr == NULL) {
+        printf("[]\n");
+        return;
+     }
+     printf("[");
+     for (size_t i = 0; i < size; ++i) {
+         printf("%d", arr[i]);
+         if (i < size - 1) {
+             printf(", ");
+         }
+     }
+     printf("]\n");
 }
