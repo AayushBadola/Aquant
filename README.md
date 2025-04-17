@@ -10,9 +10,9 @@
 
 <br>
 
-<kbd><b><span style="color:#27ae60">Current Version 1.1.0</span></b></kbd>
+<kbd><b><span style="color:#27ae60">Current Version 1.2.0</span></b></kbd>
 <br>
-<kbd><b><span style="color:#FF474C">previous Version 1.0.0</span></b></kbd>
+<kbd><b><span style="color:#FF474C">previous Version 1.1.0</span></b></kbd>
 <br>
 
 ![Language](https://img.shields.io/badge/language-C-green.svg)
