@@ -10,6 +10,8 @@
 #include <stdint.h>
 #include "aquant.h"
 
+typedef char *string; // Assuming 'string' is typedef'd to char*
+
 string get_string(const char *prompt)
 {
     if (prompt != NULL)
@@ -621,31 +623,24 @@ static int internal_find_max(const int arr[], size_t size) {
 }
 
 
-void sort_array_n(int arr[], size_t size) {
+void sort_array(int arr[], size_t size) { // Renamed here
     if (arr == NULL || size < 2) {
         return;
     }
 
-
     int max_val;
     if (!array_max(arr, size, &max_val)) {
-
         return;
     }
     int min_val;
      if (!array_min(arr, size, &min_val)) {
-
          return;
      }
 
-
     if (min_val < 0) {
-
-        fprintf(stderr, "Warning: sort_array_n currently implemented for non-negative integers only for O(n) counting sort.\n");
-
+        fprintf(stderr, "Warning: sort_array currently implemented for non-negative integers only for O(n) counting sort.\n");
         return;
     }
-
 
     unsigned long long range_check = (unsigned long long)max_val + 1;
     if (range_check > SIZE_MAX) {
@@ -653,7 +648,6 @@ void sort_array_n(int arr[], size_t size) {
          return;
     }
     size_t range = (size_t)max_val + 1;
-
 
     int *count = calloc(range, sizeof(int));
     if (count == NULL) {
@@ -668,22 +662,18 @@ void sort_array_n(int arr[], size_t size) {
         return;
     }
 
-
     for (size_t i = 0; i < size; ++i) {
         count[arr[i]]++;
     }
-
 
     for (size_t i = 1; i < range; ++i) {
         count[i] += count[i - 1];
     }
 
-
     for (long long i = size - 1; i >= 0; --i) {
          output[count[arr[i]] - 1] = arr[i];
          count[arr[i]]--;
     }
-
 
     for (size_t i = 0; i < size; ++i) {
         arr[i] = output[i];
@@ -694,7 +684,7 @@ void sort_array_n(int arr[], size_t size) {
 }
 
 
-int find_name(const char *names[], size_t size, const char *target_name) {
+int find_string(const char *names[], size_t size, const char *target_name) { // Renamed here
     if (names == NULL || target_name == NULL) {
         return -1;
     }
