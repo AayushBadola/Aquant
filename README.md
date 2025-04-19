@@ -26,7 +26,7 @@
   <a href="https://github.com/AayushBadola">
     <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub"/>
   </a>
-  <a href="https://www.linkedin.com/in/aayushbadola">
+  <a href="https://www.linkedin.com/in/aayush-badola-0a7b2b343">
     <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn"/>
   </a>
   <a href="https://mail.google.com/mail/?view=cm&fs=1&to=aayush.badola2@gmail.com" target="_blank">
@@ -837,7 +837,7 @@ Aayush Badola
   <a href="https://github.com/AayushBadola">
     <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub"/>
   </a>&nbsp;&nbsp;
-  <a href="https://linkedin.com/in/yourlinkedin">
+  <a href="https://www.linkedin.com/in/aayush-badola-0a7b2b343">
     <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn"/>
   </a>&nbsp;&nbsp;
   <a href="mailto:youremail@example.com">
