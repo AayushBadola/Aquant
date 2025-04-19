@@ -816,8 +816,10 @@ Aquant relies only on standard C libraries:
 -   Input validation and retry logic.
 
 ## 📝 License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
+Aquant is licensed under an MIT-based license for personal, non-commercial use only.
+Commercial or enterprise usage is strictly prohibited without obtaining a separate commercial license.
+- For details, see [LICENSE](./LICENSE.md)
+- For commercial licensing terms, see [COMMERCIAL_LICENSE.md](./COMMERCIAL_LICENSE.md)
 
 ## 🤝 Contributing
 
