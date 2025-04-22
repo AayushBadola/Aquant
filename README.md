@@ -142,6 +142,20 @@ gcc your_program.c aquant.c -o your_program -lm
 ./your_program
 ```
 
+### **Bonus**
+
+For running the provided `test.c` file compile both `test.c` and  `aquant.c` like this:
+
+```bash
+gcc test.c aquant.c -o test -lm
+```
+
+For running the `test.c`
+
+```bash
+./test
+```
+
 <div align="center">
 
 ## 💡 Usage Examples (General)
