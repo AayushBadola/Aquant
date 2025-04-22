@@ -133,7 +133,6 @@ cd Aquant
 4.  Compile your program linking both your code and `aquant.c`:
 
 ```bash
-# You might need -lm if using math functions directly or via aquant
 gcc your_program.c aquant.c -o your_program -lm
 ```
 
