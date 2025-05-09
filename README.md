@@ -2863,6 +2863,9 @@ Aquant relies only on standard C libraries:
 
 ## 🔄 Version History
 
+###Version 1.3.1 {Testing Ongoing}
+
+
 ### Version 1.3.0
 -   **Added Input Functions:**
     -   `get_int_range`: Get an integer within a specified min/max range.
