@@ -61,6 +61,8 @@ Developed with a focus on robustness, ease of use, and safe memory handling, Aqu
 📋 Ideal for educational environments, command-line tools, data processing utilities,
 and any C application requiring secure input, array operations, or string handling.
 ```
+### Note - While compiling if you get some errors related to array please ignore it its done so the finding speed for sort and other functions are fast just start coding dont panic 
+
 
 </div>
 
