@@ -2865,10 +2865,8 @@ Aquant relies only on standard C libraries:
 
 ## 🔄 Version History
 
-###Version 1.3.1 {Testing Ongoing}
-
-
 ### Version 1.3.0
+#### Test Status: Passed 
 -   **Added Input Functions:**
     -   `get_int_range`: Get an integer within a specified min/max range.
     -   `get_string_non_empty`: Ensures the returned string is not empty.
@@ -2901,19 +2899,22 @@ Aquant relies only on standard C libraries:
     -   Updated API reference with examples for all new functions.
 
 ### Version 1.2.0
+#### Test Status: Passed 
 -   **Added Array Sorting :** `sort_array` function (using `qsort`).
 -   **Added String Array Search :** `find_string` function for linear search in `const string[]`.
 -   **Added Array Printing :** `print_array` function for formatted output of `int[]`.
 -   Added necessary dependencies like `<string.h>`.
 
 ### Version 1.1.0
+#### Test Status: Passed 
 -   **Added Array Utility Functions:** `array_max`, `array_min`, `array_sum`.
 -   **Added Array Pair Check Functions:** `array_has_pair_sum`, `array_has_pair_product`, `array_has_pair_difference`.
 -   **Optimized Pair Check Functions:** Implemented using an internal hash table for O(n) average time complexity.
 -   Added `<stdbool.h>` and `<math.h>` dependencies (implicitly via internal hash needs).
 -   Improved input function robustness slightly.
 
-### Version 1.0.0
+### Version 1.0.0 
+#### Test Status: Passed 
 -   Initial release.
 -   Core `get_*` input functions (`get_string`, `get_char`, `get_int`, `get_long`, `get_float`, `get_double`).
 -   Input validation and retry logic.
